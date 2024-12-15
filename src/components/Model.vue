@@ -4,7 +4,9 @@
     :object="model"
     :scale
     :position
-    :rotation />
+    :rotation
+    cast-shadow
+    receive-shadow />
 </template>
 
 <script setup lang="ts">
@@ -26,7 +28,7 @@
   const applyMaterials = (object) => {
     const textureLoader = new THREE.TextureLoader()
     const texture = textureLoader.load(textureImage)
-    const material = new THREE.MeshStandardMaterial({ map: texture })
+    const material = new THREE.MeshMatcapMaterial({ map: texture, side: THREE.DoubleSide })
 
     object.traverse((child) => (child.material = material))
   }

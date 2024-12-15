@@ -6,18 +6,19 @@
 
 <template>
   <TresCanvas
-    clear-color="#82DBC5"
-    window-size>
+    clear-color="#cbecf8"
+    window-size
+    shadows>
     <TresPerspectiveCamera :position="[9, 9, 9]" />
-    <OrbitControls />
+    <OrbitControls
+      :enable-pan="false"
+      :maxPolarAngle="Math.PI / 2.5" />
 
     <TresDirectionalLight
-      :position="[1, 2, 3]"
-      :intensity="0.5"
+      :position="[3, 6, 9]"
+      :intensity="0.6"
       cast-shadow />
-    <TresAmbientLight
-      :intensity="0.5"
-      cast-shadow />
+    <TresAmbientLight :intensity="0.2" />
     <Ground />
   </TresCanvas>
 </template>

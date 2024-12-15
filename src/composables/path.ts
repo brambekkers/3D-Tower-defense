@@ -45,22 +45,14 @@ export const usePath = (matrix: Tile[][]) => {
 
     while (stack.length) {
       const { x, z } = stack.at(-1) // Peek last item
-
       if (x === endTile.x && z === endTile.z) break
-
-      // Get unvisited neighboring tiles
       const directions = shuffle(getValidDirections(x, z).filter((d) => !matrix[d.z][d.x].visited))
 
       if (directions.length) {
         const next = directions[0]
         matrix[next.z][next.x].visited = true
-
-        // Push next tile to the stack
         stack.push(next)
-      } else {
-        console.log('Backtracking')
-        stack.pop()
-      }
+      } else stack.pop()
     }
   }
 
