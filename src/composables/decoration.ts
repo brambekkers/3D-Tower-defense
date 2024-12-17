@@ -1,16 +1,16 @@
 import { ref } from 'vue';
 
 // Tiles
-import Tree1 from '../assets/models/detail-tree.fbx';
-import Tree2 from '../assets/models/detail-tree-large.fbx';
+import Tree1 from '@/assets/models/detail-tree.fbx';
+import Tree2 from '@/assets/models/detail-tree-large.fbx';
 
 // Decoration
-import Rock1 from '../assets/models/detail-dirt.fbx';
-import Rock2 from '../assets/models/detail-dirt-large.fbx';
-import Rock3 from '../assets/models/detail-rocks-large.fbx';
+import Rock1 from '@/assets/models/detail-dirt.fbx';
+import Rock2 from '@/assets/models/detail-dirt-large.fbx';
+import Rock3 from '@/assets/models/detail-rocks-large.fbx';
 
-import type { Tile } from '../types/Tile.ts';
-import type { Decoration } from '../types/Decoration.ts';
+import type { Tile } from '@/types/Tile.ts';
+import type { Decoration } from '@/types/Decoration.ts';
 
 export const useDecoration = (matrix: Tile[][]) => {
   const size = matrix.length;

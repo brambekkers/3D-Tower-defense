@@ -1,8 +1,9 @@
-import { newTowers } from '../constants/Towers.js';
+import { newTowerData } from '@/constants/Towers.js';
 
 export type Tower = {
   x: number;
   z: number;
+  type: 'square' | 'round';
   models: any[];
   rotation: number[];
   range: number;
@@ -10,4 +11,4 @@ export type Tower = {
   fireRate: number;
 };
 
-export type NewTower = (typeof newTowers)[0];
+export type NewTowerData = (typeof newTowerData)[keyof typeof newTowerData];

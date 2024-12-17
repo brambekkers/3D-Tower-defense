@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Dirt from '../assets/models/tile-dirt.fbx';
-import type { Tile } from '../types/Tile.ts';
+import Dirt from '@/assets/models/tile-dirt.fbx';
+import type { Tile } from '@/types/Tile.ts';
 import Model from './Model.vue';
 
 const { tile, x, z } = defineProps<{

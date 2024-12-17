@@ -5,15 +5,15 @@ defineProps<{ gems: number; coins: number; lives: number }>();
 <template>
   <section id="stats">
     <div>
-      <img src="../../assets/ui/heart.svg" alt="Heart" />
+      <img src="@/assets/ui/heart.svg" alt="Heart" />
       {{ lives }}
     </div>
     <div>
-      <img src="../../assets/ui/coin.svg" alt="Coin" />
+      <img src="@/assets/ui/coin.svg" alt="Coin" />
       {{ coins }}
     </div>
     <div>
-      <img src="../../assets/ui/gem.svg" alt="Gem" />
+      <img src="@/assets/ui/gem.svg" alt="Gem" />
       {{ gems }}
     </div>
   </section>

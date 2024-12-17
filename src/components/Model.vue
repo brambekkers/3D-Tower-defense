@@ -13,7 +13,7 @@
   import * as THREE from 'three'
   import { shallowRef } from 'vue'
   import { useFBX } from '@tresjs/cientos'
-  import textureImage from '../assets/models/textures/colormap.png'
+  import textureImage from '@/assets/models/textures/colormap.png'
 
   type Props = {
     fbx: string

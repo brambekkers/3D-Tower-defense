@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { newTowers } from '../../constants/Towers';
+import { newTowerData } from '@/constants/Towers';
 
-import type { BuildMode, SelectedTower } from '../../types/Game';
-import type { NewTower } from '../../types/Tower';
+import type { BuildMode, NewTowerKey } from '@/types/Game';
+import type { NewTowerData } from '@/types/Tower';
 
 const buildMode = defineModel<BuildMode>('buildMode', { required: true });
-const selectedTower = defineModel<SelectedTower>('selectedTower', { required: true });
+const newTowerKey = defineModel<NewTowerKey>('newTowerKey', { required: true });
 
 const { coins } = defineProps<{ coins: number }>();
 
-const select = (tower: NewTower) => {
+const select = (tower: NewTowerData) => {
   if (tower.price > coins) return;
-  if (buildMode.value === 'selected' && selectedTower.value === tower.key) {
+  if (buildMode.value === 'selected' && newTowerKey.value === tower.key) {
     buildMode.value = null;
-    selectedTower.value = null;
+    newTowerKey.value = null;
   } else {
     buildMode.value = 'selected';
-    selectedTower.value = tower.key;
+    newTowerKey.value = tower.key;
   }
 };
 </script>
 
 <template>
   <section id="towers">
-    <div v-for="tower in newTowers" class="card" :class="{ selected: selectedTower === tower.key }" @click="select(tower)">
+    <div v-for="tower in newTowerData" class="card" :class="{ selected: newTowerKey === tower.key }" @click="select(tower)">
       <img class="bg" :src="tower.card" :alt="`Build ${tower.name}`" />
       <h2>{{ tower.name }}</h2>
       <div class="price">
@@ -55,7 +55,7 @@ const select = (tower: NewTower) => {
     width: 220px;
     aspect-ratio: 179/274;
     transform: translateY(80%);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.15s ease-in-out;
 
     .bg {
       position: absolute;

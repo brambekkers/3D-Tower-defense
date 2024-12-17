@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import Stats from './ui/Stats.vue';
 import Towers from './ui/Towers.vue';
-import Modal from './ui/Modal.vue';
-import type { BuildMode, SelectedTower } from '../types/Game';
+import UpgradeModal from './ui/UpgradeModal.vue';
+
+// Types
+import type { BuildMode, NewTowerKey, SelectedTower } from '@/types/Game';
 
 const buildMode = defineModel<BuildMode>('buildMode', { required: true });
+const newTowerKey = defineModel<NewTowerKey>('newTowerKey', { required: true });
 const selectedTower = defineModel<SelectedTower>('selectedTower', { required: true });
 defineProps<{ gems: number; coins: number; lives: number }>();
-
-const modalVisible = ref(true);
 </script>
 
 <template>
   <div id="screen">
     <div id="debug">
       <p>buildMode: {{ buildMode }}</p>
-      <p>selectedTower: {{ selectedTower }}</p>
+      <p>selectedTower: {{ newTowerKey }}</p>
     </div>
     <Stats :gems :lives :coins />
-    <Towers v-model:buildMode="buildMode" v-model:selectedTower="selectedTower" :coins />
-    <Modal v-model="modalVisible" />
+    <Towers v-model:build-mode="buildMode" v-model:new-tower-key="newTowerKey" :coins />
+    <UpgradeModal v-model:selected-tower="selectedTower" />
   </div>
 </template>
 

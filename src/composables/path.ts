@@ -1,10 +1,10 @@
-import type { Tile } from '../types/Tile.ts';
+import type { Tile } from '@/types/Tile.ts';
 
 // Tiles
-import Tile_Empty from '../assets/models/tile.fbx';
-import Tile_End from '../assets/models/tile-end-round.fbx';
-import Tile_Path from '../assets/models/tile-straight.fbx';
-import Tile_Corner from '../assets/models/tile-corner-round.fbx';
+import Tile_Empty from '@/assets/models/tile.fbx';
+import Tile_End from '@/assets/models/tile-end-round.fbx';
+import Tile_Path from '@/assets/models/tile-straight.fbx';
+import Tile_Corner from '@/assets/models/tile-corner-round.fbx';
 
 export const usePath = (matrix: Tile[][]) => {
   const size = matrix.length;

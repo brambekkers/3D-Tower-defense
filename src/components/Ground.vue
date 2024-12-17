@@ -2,19 +2,19 @@
 import { ref } from 'vue';
 
 // Types
-import type { Tile } from '../types/Tile.ts';
-import type { BuildMode } from '../types/Game';
+import type { Tile } from '@/types/Tile.ts';
+import type { BuildMode } from '@/types/Game';
 
 // Composables
-import { useDecoration } from '../composables/decoration';
-import { usePath } from '../composables/path';
+import { useDecoration } from '@/composables/decoration';
+import { usePath } from '@/composables/path';
 
 // Components
 import TileComp from './Tile.vue';
 import Model from './Model.vue';
 
 // Models
-import Selection from '../assets/models/selection-a.fbx';
+import Selection from '@/assets/models/selection-a.fbx';
 
 const { matrix } = defineProps<{ matrix: Tile[][]; buildMode: BuildMode }>();
 defineEmits(['clickTile']);

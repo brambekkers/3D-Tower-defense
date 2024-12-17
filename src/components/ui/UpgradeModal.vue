@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const visible = defineModel<boolean>({ required: true });
+import { SelectedTower } from '@/types/Game';
+import StatusCard from '@/components/ui/upgradeModal/StatusCard.vue';
+
+const selectedTower = defineModel<SelectedTower>('selectedTower', { required: true });
 
 const clickInModal = (event: MouseEvent) => {
   event.stopPropagation();
@@ -7,20 +10,24 @@ const clickInModal = (event: MouseEvent) => {
 </script>
 
 <template>
-  <div v-if="visible" id="backdrop" @click="visible = false">
+  <div v-if="!!selectedTower" id="backdrop" @click="selectedTower = null">
     <section id="modal" @click="clickInModal">
       <div class="title-container">
         <img src="../../assets/ui/modalTitle.svg" alt="title background" />
         <h2 class="title">Upgrade tower</h2>
       </div>
       <div class="content">
-        <div class="status-card">
-          <img src="../../assets/ui/statusCardRed.svg" alt="status" />
-          <div id="max-level">Tower: 3/4</div>
-          <div id="power">3.523.211</div>
-        </div>
-        <div class="target-frame">
-          <img src="../../assets/ui/targetFrame.svg" alt="target" />
+        <StatusCard :selectedTower />
+        <div class="right-container">
+          <div class="target-frame">
+            <img src="../../assets/ui/targetFrame.svg" alt="target" />
+          </div>
+          <div class="blueprint-container">
+            <img id="background" src="../../assets/ui/inlaybox.svg" alt="background" />
+            <img class="blueprint" src="../../assets/ui/blueprint.svg" alt="blueprint" />
+            <img class="blueprint" src="../../assets/ui/blueprint.svg" alt="blueprint" />
+            <img class="blueprint" src="../../assets/ui/blueprint.svg" alt="blueprint" />
+          </div>
         </div>
       </div>
     </section>
@@ -85,55 +92,49 @@ const clickInModal = (event: MouseEvent) => {
     .content {
       padding: 1cqi 3cqi 3cqi 3cqi;
       display: flex;
+      align-items: start;
       gap: 2cqi;
 
-      .status-card {
-        width: 25cqi;
-        position: relative;
-        grid-column-start: 1;
-        grid-column-end: 4;
+      .right-container {
+        display: flex;
+        flex-grow: 1;
 
-        img {
-          width: 100%;
-          height: 100%;
+        flex-direction: column;
+        gap: 0.5cqi;
+
+        .target-frame {
+          width: 25cqi;
+          aspect-ratio: 177/50;
+
+          img {
+            width: 100%;
+          }
         }
 
-        #max-level {
-          position: absolute;
-          top: 2.5cqi;
-          left: 0;
-          right: 0;
+        .blueprint-container {
+          position: relative;
+          isolation: isolate;
+          padding: 2cqi;
+
           display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 1.8cqi;
-          font-weight: 700;
-          color: white;
-          text-shadow: -0.2cqw 0 black, 0 0.2cqw black, 0.1cqw 0 black, 0 -0.1cqw black;
-        }
-
-        #power {
-          position: absolute;
-          bottom: 2.5cqi;
-          left: 0;
-          right: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 2.7cqi;
-          font-weight: 700;
-          color: #ecc938;
-          text-shadow: -0.2cqw 0 black, 0 0.2cqw black, 0.1cqw 0 black, 0 -0.1cqw black;
-        }
-      }
-
-      .target-frame {
-        width: 25cqi;
-
-        aspect-ratio: 4/5;
-
-        img {
+          margin-top: auto;
+          gap: 2cqi;
           width: 100%;
+          aspect-ratio: 43/15;
+
+          justify-content: space-around;
+
+          #background {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+          }
+
+          .blueprint {
+            cursor: url('../../assets/cursor/pointer.svg'), auto;
+          }
         }
       }
     }
