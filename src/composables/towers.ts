@@ -9,7 +9,7 @@ import type { Tower } from '../types/Tower.ts';
 import type { Tile } from '../types/Tile.ts';
 
 export const useTowers = (matrix: Tile[][]) => {
-  const towers = ref<Tower[][]>([]);
+  const towers = ref<Tower[]>([]);
 
   const addTower = (x: number, z: number) => {
     console.log(matrix[z][x]);

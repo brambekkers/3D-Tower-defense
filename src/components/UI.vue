@@ -1,10 +1,15 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import Stats from './ui/Stats.vue';
 import Towers from './ui/Towers.vue';
+import Modal from './ui/Modal.vue';
+import type { BuildMode, SelectedTower } from '../types/Game';
 
-const buildMode = defineModel<'selected' | 'place' | null>('buildMode', { required: true });
-const selectedTower = defineModel<'square' | 'round' | null>('selectedTower', { required: true });
+const buildMode = defineModel<BuildMode>('buildMode', { required: true });
+const selectedTower = defineModel<SelectedTower>('selectedTower', { required: true });
 defineProps<{ gems: number; coins: number; lives: number }>();
+
+const modalVisible = ref(true);
 </script>
 
 <template>
@@ -15,24 +20,11 @@ defineProps<{ gems: number; coins: number; lives: number }>();
     </div>
     <Stats :gems :lives :coins />
     <Towers v-model:buildMode="buildMode" v-model:selectedTower="selectedTower" :coins />
+    <Modal v-model="modalVisible" />
   </div>
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Skranji:wght@400;700&display=swap');
-
-.skranji-regular {
-  font-family: 'Skranji', system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.skranji-bold {
-  font-family: 'Skranji', system-ui;
-  font-weight: 700;
-  font-style: normal;
-}
-
 body {
   overflow: hidden;
 }

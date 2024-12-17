@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { newTowers } from '../../constants/Towers';
+
+import type { BuildMode, SelectedTower } from '../../types/Game';
 import type { NewTower } from '../../types/Tower';
-const buildMode = defineModel<'selected' | 'place' | null>('buildMode', { required: true });
-const selectedTower = defineModel<'square' | 'round' | null>('selectedTower', { required: true });
+
+const buildMode = defineModel<BuildMode>('buildMode', { required: true });
+const selectedTower = defineModel<SelectedTower>('selectedTower', { required: true });
+
 const { coins } = defineProps<{ coins: number }>();
 
 const select = (tower: NewTower) => {
   if (tower.price > coins) return;
-  if (buildMode.value === 'selected') {
+  if (buildMode.value === 'selected' && selectedTower.value === tower.key) {
     buildMode.value = null;
     selectedTower.value = null;
   } else {
@@ -44,7 +48,6 @@ const select = (tower: NewTower) => {
   gap: 2rem;
 
   pointer-events: all;
-  font-family: 'Skranji', system-ui;
   font-style: normal;
 
   .card {
@@ -99,7 +102,7 @@ const select = (tower: NewTower) => {
 
     &:hover,
     &.selected {
-      cursor: pointer;
+      cursor: url('../../assets/cursor/pointer.svg'), auto;
       transform: translateY(12%);
     }
   }

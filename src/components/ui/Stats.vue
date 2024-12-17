@@ -44,7 +44,6 @@ defineProps<{ gems: number; coins: number; lives: number }>();
   background-size: 100%;
   margin-left: 1rem;
 
-  font-family: 'Skranji', system-ui;
   font-weight: 400;
   font-style: normal;
   font-size: 1.3rem;
