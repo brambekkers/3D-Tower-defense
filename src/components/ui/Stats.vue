@@ -39,7 +39,7 @@ defineProps<{ gems: number; coins: number; lives: number }>();
   text-align: center;
   width: 100px;
   aspect-ratio: 11/6;
-  background-image: url('../../assets/ui/counterBg.svg');
+  background-image: url('@/assets/ui/counterBg.svg');
   background-repeat: no-repeat;
   background-size: 100%;
   margin-left: 1rem;

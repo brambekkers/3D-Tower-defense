@@ -27,7 +27,7 @@ const select = (tower: NewTowerData) => {
       <img class="bg" :src="tower.card" :alt="`Build ${tower.name}`" />
       <h2>{{ tower.name }}</h2>
       <div class="price">
-        <img src="../../assets/ui/coin.svg" alt="Coin" />
+        <img src="@/assets/ui/coin.svg" alt="Coin" />
         {{ tower.price }}
       </div>
     </div>
@@ -102,7 +102,7 @@ const select = (tower: NewTowerData) => {
 
     &:hover,
     &.selected {
-      cursor: url('../../assets/cursor/pointer.svg'), auto;
+      cursor: url('@/assets/cursor/pointer.svg'), auto;
       transform: translateY(12%);
     }
   }

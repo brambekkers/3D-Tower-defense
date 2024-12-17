@@ -1,9 +1,5 @@
 import { ref } from 'vue';
 
-// Tower parts
-import Round_Middle from '@/assets/models/tower-round-middle-a.fbx';
-import Round_Top from '@/assets/models/tower-round-top-a.fbx';
-
 // Constants
 import { newTowers } from '@/constants/Towers.ts';
 
@@ -20,6 +16,7 @@ export const useTowers = (matrix: Tile[][]) => {
 
     towers.value.push({
       ...newTower,
+      models: [...newTower.models],
       type,
       x,
       z,

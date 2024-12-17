@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { SelectedTower } from '@/types/Game';
 import StatusCard from '@/components/ui/upgradeModal/StatusCard.vue';
+import Blueprints from '@/components/ui/upgradeModal/Blueprints.vue';
 
 const selectedTower = defineModel<SelectedTower>('selectedTower', { required: true });
 
@@ -13,21 +14,16 @@ const clickInModal = (event: MouseEvent) => {
   <div v-if="!!selectedTower" id="backdrop" @click="selectedTower = null">
     <section id="modal" @click="clickInModal">
       <div class="title-container">
-        <img src="../../assets/ui/modalTitle.svg" alt="title background" />
+        <img src="@/assets/ui/modalTitle.svg" alt="title background" />
         <h2 class="title">Upgrade tower</h2>
       </div>
       <div class="content">
         <StatusCard :selectedTower />
         <div class="right-container">
           <div class="target-frame">
-            <img src="../../assets/ui/targetFrame.svg" alt="target" />
+            <img src="@/assets/ui/targetFrame.svg" alt="target" />
           </div>
-          <div class="blueprint-container">
-            <img id="background" src="../../assets/ui/inlaybox.svg" alt="background" />
-            <img class="blueprint" src="../../assets/ui/blueprint.svg" alt="blueprint" />
-            <img class="blueprint" src="../../assets/ui/blueprint.svg" alt="blueprint" />
-            <img class="blueprint" src="../../assets/ui/blueprint.svg" alt="blueprint" />
-          </div>
+          <Blueprints v-model:selectedTower="selectedTower" />
         </div>
       </div>
     </section>
@@ -45,7 +41,7 @@ const clickInModal = (event: MouseEvent) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: url('../../assets/cursor/pointer.svg'), auto;
+  cursor: url('@/assets/cursor/pointer.svg'), auto;
 
   #modal {
     container-type: inline-size;
@@ -55,7 +51,7 @@ const clickInModal = (event: MouseEvent) => {
     flex-direction: column;
     border-radius: 1rem;
     border: 0.2cqi solid black;
-    cursor: url('../../assets/cursor/arrow.svg'), auto;
+    cursor: url('@/assets/cursor/arrow.svg'), auto;
 
     .title-container {
       position: relative;
@@ -108,32 +104,6 @@ const clickInModal = (event: MouseEvent) => {
 
           img {
             width: 100%;
-          }
-        }
-
-        .blueprint-container {
-          position: relative;
-          isolation: isolate;
-          padding: 2cqi;
-
-          display: flex;
-          margin-top: auto;
-          gap: 2cqi;
-          width: 100%;
-          aspect-ratio: 43/15;
-
-          justify-content: space-around;
-
-          #background {
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            width: 100%;
-            height: 100%;
-          }
-
-          .blueprint {
-            cursor: url('../../assets/cursor/pointer.svg'), auto;
           }
         }
       }

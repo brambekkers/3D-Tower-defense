@@ -10,7 +10,7 @@ const getStatusCard = (type: 'round' | 'square') => (type === 'round' ? statusCa
 <template>
   <div class="status-card">
     <img :src="getStatusCard(selectedTower.type)" alt="status" />
-    <div id="max-level">Tower: 3/4</div>
+    <div id="max-level">Tower: {{ selectedTower.models.length }}/5</div>
     <div id="power">3.523.211</div>
   </div>
 </template>
@@ -35,7 +35,7 @@ const getStatusCard = (type: 'round' | 'square') => (type === 'round' ? statusCa
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.8cqi;
+    font-size: 2cqi;
     font-weight: 700;
     color: white;
     text-shadow: -0.2cqw 0 black, 0 0.2cqw black, 0.1cqw 0 black, 0 -0.1cqw black;

@@ -68,7 +68,7 @@ const clickTower = ({ event, tower }) => {
     <TresGroup :position="[-(size / 2), 0, -(size / 2)]">
       <Ground v-model:buildMode="buildMode" :matrix @click-tile="clickTile" />
       <!-- Towers -->
-      <TowerComp v-for="(tower, i) of towers" :key="i" :tower="tower" @click-tower="clickTower" />
+      <TowerComp v-for="(tower, i) of towers" :key="tower.type + i + tower.models.length" :tower="tower" @click-tower="clickTower" />
     </TresGroup>
   </TresCanvas>
 </template>
