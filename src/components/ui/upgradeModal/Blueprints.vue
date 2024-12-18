@@ -1,18 +1,52 @@
 <script setup lang="ts">
 import { SelectedTower } from '@/types/Game';
 
-// Tower parts
-import Round_Middle from '@/assets/models/tower-round-middle-a.fbx';
-import Round_Top from '@/assets/models/tower-round-top-a.fbx';
+// Round Tower partsf
+import Round_Middle1 from '@/assets/models/tower-round-middle-a.fbx';
+import Round_Middle2 from '@/assets/models/tower-round-middle-b.fbx';
+import Round_Middle3 from '@/assets/models/tower-round-middle-c.fbx';
+import Round_Roof from '@/assets/models/tower-round-roof-a.fbx';
+
+// Square Tower parts
+import Square_Middle from '@/assets/models/tower-square-middle-a.fbx';
+import Square_Top from '@/assets/models/tower-square-top-a.fbx';
+
+// Weapon Tower parts
+import Weapon_Ballista from '@/assets/models/weapon-ballista.fbx';
+import Weapon_Cannon from '@/assets/models/weapon-cannon.fbx';
+import Weapon_Turret from '@/assets/models/weapon-turret.fbx';
 
 const selectedTower = defineModel<SelectedTower>('selectedTower', { required: true });
 
-const addBlueprint = () => {
-  console.log('Blueprint added');
-  if (selectedTower.value.models.length < 4) {
-    selectedTower.value.models.push(Round_Middle);
+const roundMiddels = [Round_Middle1, Round_Middle2, Round_Middle3];
+
+const addSquareParts = () => {
+  console.log('Square parts added');
+  if (selectedTower.value.models.length < 3) {
+    selectedTower.value.models.push(Square_Middle);
+  } else if (selectedTower.value.models.length === 3) {
+    selectedTower.value.models.push(Square_Top);
   } else if (selectedTower.value.models.length === 4) {
-    selectedTower.value.models.push(Round_Top);
+    selectedTower.value.models.push(Weapon_Ballista);
+  }
+};
+
+const addRoundParts = () => {
+  console.log('Round parts added');
+  if (selectedTower.value.models.length < 4) {
+    const randomMiddle = roundMiddels[Math.floor(Math.random() * roundMiddels.length)];
+    selectedTower.value.models.push(randomMiddle);
+  } else if (selectedTower.value.models.length === 4) {
+    selectedTower.value.models.push(Round_Roof);
+  }
+};
+
+const addBlueprint = () => {
+  console.log('Blueprint added', selectedTower.value);
+  if (selectedTower.value.type === 'round') {
+    addRoundParts();
+  } else {
+    addSquareParts();
   }
 };
 </script>

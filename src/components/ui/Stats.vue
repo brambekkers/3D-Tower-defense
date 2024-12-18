@@ -1,5 +1,8 @@
 <script setup lang="ts">
-defineProps<{ gems: number; coins: number; lives: number }>();
+import { storeToRefs } from 'pinia';
+import { usePlayerStore } from '@/stores/player';
+
+const { gems, coins, lives } = storeToRefs(usePlayerStore());
 </script>
 
 <template>

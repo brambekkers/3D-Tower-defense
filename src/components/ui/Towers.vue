@@ -1,16 +1,18 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
+// Stores
+import { usePlayerStore } from '@/stores/player';
+import { useGameStore } from '@/stores/game';
+// Constants
 import { newTowerData } from '@/constants/Towers';
-
-import type { BuildMode, NewTowerKey } from '@/types/Game';
+// Types
 import type { NewTowerData } from '@/types/Tower';
 
-const buildMode = defineModel<BuildMode>('buildMode', { required: true });
-const newTowerKey = defineModel<NewTowerKey>('newTowerKey', { required: true });
-
-const { coins } = defineProps<{ coins: number }>();
+const { newTowerKey, buildMode } = storeToRefs(useGameStore());
+const { coins } = storeToRefs(usePlayerStore());
 
 const select = (tower: NewTowerData) => {
-  if (tower.price > coins) return;
+  if (tower.price > coins.value) return;
   if (buildMode.value === 'selected' && newTowerKey.value === tower.key) {
     buildMode.value = null;
     newTowerKey.value = null;

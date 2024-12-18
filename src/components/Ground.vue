@@ -1,40 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
-// Types
-import type { Tile } from '@/types/Tile.ts';
-import type { BuildMode } from '@/types/Game';
-
-// Composables
-import { useDecoration } from '@/composables/decoration';
-import { usePath } from '@/composables/path';
+import { storeToRefs } from 'pinia';
+import { useGameStore } from '@/stores/game';
 
 // Components
-import TileComp from './Tile.vue';
+import Tile from './Tile.vue';
 import Model from './Model.vue';
 
 // Models
 import Selection from '@/assets/models/selection-a.fbx';
 
-const { matrix } = defineProps<{ matrix: Tile[][]; buildMode: BuildMode }>();
-defineEmits(['clickTile']);
-
-const size = matrix.length;
-const selectionPos = ref({ x: 0, z: 0 });
-
-usePath(matrix);
-const { decorations } = useDecoration(matrix);
-
-const setSelection = ({ x, z }) => {
-  selectionPos.value.x = x;
-  selectionPos.value.z = z;
-};
+const { matrix, decorations, buildMode, selectedPos } = storeToRefs(useGameStore());
 </script>
 
 <template>
   <!-- Tiles -->
   <template v-for="(row, z) of matrix" :key="'z' + z">
-    <TileComp v-for="(tile, x) of row" :key="'x' + x" :tile :x :z @selection="setSelection" @click="$emit('clickTile', { event: $event, x, z })" />
+    <Tile v-for="(tile, x) of row" :key="'x' + x" :tile :x :z />
   </template>
 
   <TresGroup :position="[0, 0.2, 0]">
@@ -51,7 +32,7 @@ const setSelection = ({ x, z }) => {
 
     <!-- Mouse selection -->
     <Suspense>
-      <Model v-if="buildMode === 'selected'" :fbx="Selection" :scale="0.008" :position="[selectionPos.x, 0, selectionPos.z]" />
+      <Model v-if="buildMode === 'selected'" :fbx="Selection" :scale="0.008" :position="[selectedPos.x, 0, selectedPos.z]" />
     </Suspense>
   </TresGroup>
 </template>

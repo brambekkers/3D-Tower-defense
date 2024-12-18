@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { SelectedTower } from '@/types/Game';
+import { storeToRefs } from 'pinia';
+import { useTowerStore } from '@/stores/tower';
+
 import StatusCard from '@/components/ui/upgradeModal/StatusCard.vue';
 import Blueprints from '@/components/ui/upgradeModal/Blueprints.vue';
 
-const selectedTower = defineModel<SelectedTower>('selectedTower', { required: true });
+const { selectedTower } = storeToRefs(useTowerStore());
 
 const clickInModal = (event: MouseEvent) => {
   event.stopPropagation();
