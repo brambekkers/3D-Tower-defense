@@ -1,16 +1,4 @@
-import { ref } from 'vue';
-import { defineStore } from 'pinia';
-import { uuid } from '@/utils/id';
-
-// Constants
 import { newTowers } from '@/constants/Towers.ts';
-
-// Types
-import type { SelectedTower } from '@/types/Game';
-import type { Tower } from '@/types/Tower.ts';
-
-// Stores
-import { useGameStore } from '@/stores/game';
 
 // Round Tower parts
 import Round_Bottom from '@/assets/models/tower-round-bottom-a.fbx';

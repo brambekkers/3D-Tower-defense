@@ -1,10 +1,10 @@
-import type { Tile } from '@/types/Tile.ts';
-
 // Tiles
 import Tile_Empty from '@/assets/models/tile.fbx';
 import Tile_End from '@/assets/models/tile-end-round.fbx';
 import Tile_Path from '@/assets/models/tile-straight.fbx';
 import Tile_Corner from '@/assets/models/tile-corner-round.fbx';
+
+type StackItem = { x: number; y: number };
 
 export const usePath = (matrix: Tile[][]) => {
   const size = matrix.length;
@@ -12,7 +12,8 @@ export const usePath = (matrix: Tile[][]) => {
   const maxPathLength = size * 4;
   const startTile = { x: Math.floor(Math.random() * size), z: 0 };
   const endTile = { x: Math.floor(Math.random() * size), z: size - 1 };
-  let stack = [];
+  let stack: StackItem[] = [];
+  let path: number[][] = [];
 
   const resetTiles = () => {
     for (let y = 0; y < size; y++) {
@@ -29,7 +30,7 @@ export const usePath = (matrix: Tile[][]) => {
     }
   };
 
-  const getValidDirections = (x, z) => {
+  const getValidDirections = (x: number, z: number) => {
     return [
       { x: x + 1, z },
       { x: x - 1, z },
@@ -38,7 +39,7 @@ export const usePath = (matrix: Tile[][]) => {
     ].filter((d) => d.x >= 0 && d.x < size && d.z >= 0 && d.z < size && !stack.find((t) => t.x === d.x && t.z === d.z));
   };
 
-  const shuffle = (array) => array.sort(() => Math.random() - 0.5);
+  const shuffle = (array: StackItem[]) => array.sort(() => Math.random() - 0.5);
 
   const createPath = async () => {
     stack = [{ x: startTile.x, z: startTile.z }];
@@ -56,21 +57,21 @@ export const usePath = (matrix: Tile[][]) => {
     }
   };
 
-  const setStartModel = ({ z, x, nx, nz }) => {
+  const setStartModel = ({ z, x, nx, nz }: Record<string, number>) => {
     matrix[z][x].model = Tile_End;
     if (nx === 1) matrix[z][x].rotation = [0, Math.PI / 2, 0];
     else if (nx === -1) matrix[z][x].rotation = [0, -Math.PI / 2, 0];
     else if (nz === 1) matrix[z][x].rotation = [0, 0, 0];
   };
 
-  const setEndModel = ({ x, z, px, pz }) => {
+  const setEndModel = ({ x, z, px, pz }: Record<string, number>) => {
     matrix[z][x].model = Tile_End;
     if (px === -1) matrix[z][x].rotation = [0, Math.PI / 2, 0];
     else if (px === 1) matrix[z][x].rotation = [0, -Math.PI / 2, 0];
     else if (pz === 1) matrix[z][x].rotation = [0, -Math.PI, 0];
   };
 
-  const setCornerModel = ({ x, z, nx, nz, px, pz }) => {
+  const setCornerModel = ({ x, z, nx, nz, px, pz }: Record<string, number>) => {
     matrix[z][x].model = Tile_Corner;
     if (nx === 0 && px === 1 && nz === 1 && pz === 0) matrix[z][x].rotation = [0, -Math.PI / 2, 0];
     else if (nx === 1 && px === 0 && nz === 0 && pz === 1) matrix[z][x].rotation = [0, Math.PI / 2, 0];
@@ -81,14 +82,14 @@ export const usePath = (matrix: Tile[][]) => {
     else if (nx === -1 && px === 0 && nz === 0 && pz === -1) matrix[z][x].rotation = [0, -Math.PI / 2, 0];
   };
 
-  const setStraightModel = ({ x, z, nx, nz, px, pz }) => {
+  const setStraightModel = ({ x, z, nx, nz, px, pz }: Record<string, number>) => {
     matrix[z][x].model = Tile_Path;
     if (nx === 0 && px === 0) matrix[z][x].rotation = [0, 0, 0];
     else if (nz === 0 && pz === 0) matrix[z][x].rotation = [0, Math.PI / 2, 0];
   };
 
   const updateModels = () => {
-    const path = stack.map((t) => Object.values(t));
+    path = stack.map((t) => Object.values(t));
 
     path.forEach(([x, z], i) => {
       matrix[z][x].isBlocked = true;
@@ -118,5 +119,8 @@ export const usePath = (matrix: Tile[][]) => {
   updateModels();
   return {
     matrix,
+    startTile,
+    endTile,
+    path,
   };
 };

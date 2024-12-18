@@ -1,6 +1,3 @@
-import { ref } from 'vue';
-import { defineStore } from 'pinia';
-
 export const usePlayerStore = defineStore('player', () => {
   const lives = ref(10);
   const coins = ref(1000);
@@ -12,5 +9,8 @@ export const usePlayerStore = defineStore('player', () => {
     return true;
   };
 
-  return { lives, gems, coins, hasEnoughCoins };
+  const decreaseLives = (amount: number) => {
+    lives.value -= amount;
+  };
+  return { lives, gems, coins, hasEnoughCoins, decreaseLives };
 });

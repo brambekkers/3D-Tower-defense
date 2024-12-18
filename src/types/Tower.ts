@@ -6,7 +6,6 @@ export type Tower = {
   id: number;
   type: 'square' | 'round';
   models: any[];
-  rotation: number[];
   range: number;
   damage: number;
   fireRate: number;
