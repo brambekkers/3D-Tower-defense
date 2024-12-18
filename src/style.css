@@ -13,4 +13,5 @@
 
 body {
   cursor: url('./assets/cursor/arrow.svg'), auto;
+  scroll-behavior: smooth;
 }
