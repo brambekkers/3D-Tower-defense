@@ -1,16 +1,18 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
+
+import { useTowerStore } from '@/stores/tower';
 import statusCardRed from '@/assets/ui/statusCardRed.svg';
 import statusCardPurple from '@/assets/ui/statusCardPurple.svg';
-import { SelectedTower } from '@/types/Game.ts';
 
-defineProps<{ selectedTower: SelectedTower }>();
-const getStatusCard = (type: 'round' | 'square') => (type === 'round' ? statusCardRed : statusCardPurple);
+const { selectedTower } = storeToRefs(useTowerStore());
+const getStatusCard = (type: 'round' | 'square' | undefined) => (type === 'round' ? statusCardRed : statusCardPurple);
 </script>
 
 <template>
   <div class="status-card">
-    <img :src="getStatusCard(selectedTower.type)" alt="status" />
-    <div id="max-level">Tower: {{ selectedTower.models.length }}/5</div>
+    <img :src="getStatusCard(selectedTower?.type)" alt="status" />
+    <div id="max-level">Tower: {{ selectedTower?.models.length }}/5</div>
     <div id="power">3.523.211</div>
   </div>
 </template>

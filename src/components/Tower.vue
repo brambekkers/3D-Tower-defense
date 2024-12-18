@@ -26,6 +26,7 @@ const clickTower = (event: Event) => {
   <Suspense>
     <Model
       v-for="(model, i) of tower.models"
+      :key="model + tower.models.length + i"
       :fbx="model"
       :scale="0.004"
       :position="[tower.x, 0.2 + 0.2 * i, tower.z]"

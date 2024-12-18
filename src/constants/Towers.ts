@@ -1,6 +1,6 @@
 // Tower parts
-import Round_Bottom from '@/assets/models/tower-round-bottom-a.fbx';
-import Square_Bottom from '@/assets/models/tower-square-bottom-a.fbx';
+import Round_Shoot from '@/assets/models/tower-round-middle-b.fbx';
+import Weapon_Ballista from '@/assets/models/weapon-ballista.fbx';
 
 // Ui
 import purpleCard from '@/assets/ui/cardPurple.svg';
@@ -25,7 +25,7 @@ export const newTowers = {
   round: {
     x: 0,
     z: 0,
-    models: [Round_Bottom],
+    models: [Round_Shoot],
     rotation: [0, 0, 0],
     range: 5,
     damage: 1,
@@ -34,7 +34,7 @@ export const newTowers = {
   square: {
     x: 0,
     z: 0,
-    models: [Square_Bottom],
+    models: [Weapon_Ballista],
     rotation: [0, 0, 0],
     range: 5,
     damage: 1,

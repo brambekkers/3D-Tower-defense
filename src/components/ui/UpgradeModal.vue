@@ -25,7 +25,7 @@ const clickInModal = (event: MouseEvent) => {
           <div class="target-frame">
             <img src="@/assets/ui/targetFrame.svg" alt="target" />
           </div>
-          <Blueprints v-model:selectedTower="selectedTower" />
+          <Blueprints />
         </div>
       </div>
     </section>

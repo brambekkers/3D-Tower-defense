@@ -23,7 +23,7 @@ const { towers } = storeToRefs(useTowerStore());
     <TresGroup :position="[-(size / 2), 0, -(size / 2)]">
       <Ground />
       <!-- Towers -->
-      <Tower v-for="(tower, i) of towers" :key="tower.type + i + tower.models.length" :tower="tower" />
+      <Tower v-for="(tower, i) of towers" :key="JSON.stringify(tower) + i" :tower="tower" />
     </TresGroup>
   </TresCanvas>
 </template>
