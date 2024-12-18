@@ -23,15 +23,17 @@ const clickTower = (event: Event) => {
 </script>
 
 <template>
-  <Suspense>
-    <Model
-      v-for="(model, i) of tower.models"
-      :key="model + tower.models.length + i"
-      :fbx="model"
-      :scale="0.004"
-      :position="[tower.x, 0.2 + 0.2 * i, tower.z]"
-      :rotation="tower.rotation"
-      @click="clickTower"
-    />
-  </Suspense>
+  <TresGroup :position="[tower.x, 0.2, tower.z]">
+    <Suspense>
+      <Model
+        v-for="(model, i) of tower.models"
+        :key="model.id"
+        :fbx="model.model"
+        :scale="0.004"
+        :position="[0 + model.position[0], 0.2 * i + model.position[1], 0 + model.position[2]]"
+        :rotation="model.rotation"
+        @click="clickTower"
+      />
+    </Suspense>
+  </TresGroup>
 </template>

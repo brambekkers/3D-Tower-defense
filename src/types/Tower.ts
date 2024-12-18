@@ -3,6 +3,7 @@ import { newTowerData } from '@/constants/Towers.js';
 export type Tower = {
   x: number;
   z: number;
+  id: number;
   type: 'square' | 'round';
   models: any[];
   rotation: number[];
